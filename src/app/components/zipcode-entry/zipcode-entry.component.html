@@ -1,0 +1,12 @@
+<div class="well">
+    <h2>Enter a zipcode:</h2>
+    <input type="text" #zipcode placeholder="Zipcode" class="form-control" [formControl]="zipCodeControl">
+    <span class="text-hint text-danger"
+        *ngIf="zipCodeControl.hasError('duplicatedZipcode') && zipCodeControl.dirty">
+        This zipcode is already in the list
+    </span>
+    <br>
+    <button class="btn btn-primary" (click)="addLocation()">
+        Add location
+    </button>
+</div>
