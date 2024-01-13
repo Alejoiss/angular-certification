@@ -16,6 +16,8 @@ export class TabsComponent implements AfterContentInit {
     ) { }
 
     ngAfterContentInit(): void {
+        this.checkForActiveTabs();
+
         this.tabs.changes.subscribe(() => this.checkForActiveTabs());
     }
 
