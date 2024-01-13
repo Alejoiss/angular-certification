@@ -1,12 +1,7 @@
-<div>
-    <div *ngFor="let location of currentConditionsByZip$ | async" class="well flex"
-        (click)="showForecast($event, location.zip)">
-        <app-conditions-details [location]="location"
-            (closeEvent)="locationService.removeLocation(location)">
+<app-tabs [showLastOnAdd]="true">
+    <app-tab-item title="{{location.data.name}} ({{location.zip}})" (close)="locationService.removeLocation(location)"
+        *ngFor="let location of currentConditionsByZip$ | async">
+        <app-conditions-details [location]="location" (closeEvent)="locationService.removeLocation(location)">
         </app-conditions-details>
-    </div>
-</div>
-
-<div *ngIf="loadingConditions$ | async" class="loading">
-    <img src="https://www.icegif.com/wp-content/uploads/2023/07/icegif-1263.gif" alt="Loading...">
-</div>
+    </app-tab-item>
+</app-tabs>

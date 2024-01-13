@@ -1,0 +1,7 @@
+.loading {
+    display: inline;
+
+    img {
+        width: 40px;
+    }
+}

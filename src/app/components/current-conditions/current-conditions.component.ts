@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectAllCurrentConditions, selectLoadingConditions } from 'app/store/weather/weather-selectors';
+import { selectAllCurrentConditions } from 'app/store/weather/weather-selectors';
 import { Observable } from 'rxjs';
 
 import { ConditionsAndZip } from '../../conditions-and-zip.type';
@@ -18,7 +18,6 @@ export class CurrentConditionsComponent {
 
     protected locationService: LocationService = inject(LocationService);
     protected currentConditionsByZip$: Observable<ConditionsAndZip[]> = this.store.select(selectAllCurrentConditions);
-    protected loadingConditions$: Observable<boolean> = this.store.select(selectLoadingConditions);
 
     constructor(
         private store: Store
