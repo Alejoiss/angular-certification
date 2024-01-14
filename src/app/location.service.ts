@@ -3,8 +3,6 @@ import { Store } from '@ngrx/store';
 import { ConditionsAndZip } from 'app/conditions-and-zip.type';
 import { WeatherActions } from 'app/store/weather/weather-action-types';
 
-import { WeatherService } from './weather.service';
-
 export const LOCATIONS: string = "locations";
 
 @Injectable()
@@ -13,14 +11,13 @@ export class LocationService {
     locations: string[] = [];
 
     constructor(
-        private weatherService: WeatherService,
         private store: Store
     ) {
         let locString = localStorage.getItem(LOCATIONS);
         if (locString)
             this.locations = JSON.parse(locString);
         for (let loc of this.locations)
-            this.weatherService.addCurrentConditions(loc);
+            this.store.dispatch(WeatherActions.loadCurrentConditionsAction({ zipcode: loc }));
     }
 
     addLocation(zipcode: string) {

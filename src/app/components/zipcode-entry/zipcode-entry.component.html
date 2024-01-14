@@ -10,6 +10,7 @@
     <button class="btn btn-primary" (click)="addLocation()">
         Add location
     </button>
+    <!-- Loading for user see when the request is being made -->
     <div *ngIf="loadingConditions$ | async" class="loading">
         <img src="https://www.icegif.com/wp-content/uploads/2023/07/icegif-1263.gif" alt="Loading...">
     </div>

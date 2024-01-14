@@ -4,4 +4,5 @@ export interface ConditionsAndZip {
     id: number;
     zip: string;
     data: CurrentConditions;
+    date: number;
 }

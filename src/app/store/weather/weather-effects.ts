@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { WeatherActions } from 'app/store/weather/weather-action-types';
 import { WeatherService } from 'app/weather.service';
 import { concatMap, filter, map } from 'rxjs/operators';
@@ -15,16 +14,17 @@ export class WeatherEffects {
                 .pipe(
                     ofType(WeatherActions.loadCurrentConditionsAction),
                     filter(data => !!data.zipcode),
-                    concatMap(action => this.weatherService.addCurrentConditions(action.zipcode)
+                    concatMap(action => this.weatherService.getCurrentConditions(action.zipcode)
                         .pipe(
                             map(currentConditions => ({ currentConditions, zipcode: action.zipcode }))
                         )
                     ),
                     map(({ currentConditions, zipcode }) => WeatherActions.currentConditionsLoadedAction({
                         conditionsAndZip: {
-                            id: new Date().getTime(),
+                            id: new Date().getTime(), // create a unique id for store
                             data: currentConditions,
-                            zip: zipcode
+                            zip: zipcode,
+                            date: new Date().getTime() // duplicate, because id could be another value
                         }
                     }))
                 );
@@ -33,7 +33,6 @@ export class WeatherEffects {
 
     constructor(
         private actions$: Actions,
-        private weatherService: WeatherService,
-        private store: Store
+        private weatherService: WeatherService
     ) {}
 }

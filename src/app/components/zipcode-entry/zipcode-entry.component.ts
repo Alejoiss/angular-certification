@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectLoadingConditions } from 'app/store/weather/weather-selectors';
 import { CustomValidators } from 'app/validators/custom-validators';
@@ -14,7 +14,7 @@ import { LocationService } from '../../location.service';
 })
 export class ZipcodeEntryComponent {
 
-    zipCodeControl = new FormControl('', null, CustomValidators.zipcodeEntryValidator(this.store));
+    zipCodeControl = new FormControl('', Validators.required, CustomValidators.zipcodeEntryValidator(this.store));
     protected loadingConditions$: Observable<boolean> = this.store.select(selectLoadingConditions);
 
     constructor(

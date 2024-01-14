@@ -9,6 +9,7 @@ import { TabItemComponent } from 'app/components/tabs/tab-item/tab-item.componen
 export class TabsComponent implements AfterContentInit {
     @ContentChildren(TabItemComponent) tabs: QueryList<TabItemComponent>;
 
+    // If true, the last tab will be shown when a new tab is added dinamically
     @Input() showLastOnAdd = false;
 
     constructor(
@@ -18,6 +19,7 @@ export class TabsComponent implements AfterContentInit {
     ngAfterContentInit(): void {
         this.checkForActiveTabs();
 
+        // When a new tab is added into ng-content, check if it should be marked as active
         this.tabs.changes.subscribe(() => this.checkForActiveTabs());
     }
 

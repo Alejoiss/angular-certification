@@ -1,0 +1,6 @@
+{{ (dailyForecast.dt * 1000) | date:'EEEE, MMM d'}}:
+{{dailyForecast.weather[0].main}}
+- Min: {{dailyForecast.temp.min | number:'.0-0'}}
+- Max: {{dailyForecast.temp.max | number:'.0-0'}}
+
+<img [src]="icon" class="icon">

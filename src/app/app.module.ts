@@ -9,6 +9,7 @@ import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ConditionsDetailsComponent } from 'app/components/conditions-details/conditions-details.component';
+import { ForecastDetailsComponent } from 'app/components/forecast-details/forecast-details.component';
 import { TabItemComponent } from 'app/components/tabs/tab-item/tab-item.component';
 import { TabsComponent } from 'app/components/tabs/tabs.component';
 import { WeatherEffects } from 'app/store/weather/weather-effects';
@@ -33,7 +34,8 @@ import { WeatherService } from './weather.service';
         ConditionsDetailsComponent,
         MainPageComponent,
         TabsComponent,
-        TabItemComponent
+        TabItemComponent,
+        ForecastDetailsComponent
     ],
     imports: [
         BrowserModule,
