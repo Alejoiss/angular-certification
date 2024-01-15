@@ -5,7 +5,7 @@ import { selectLoadingConditions } from 'app/store/weather/weather-selectors';
 import { CustomValidators } from 'app/validators/custom-validators';
 import { Observable } from 'rxjs';
 
-import { LocationService } from '../../location.service';
+import { LocationService } from '../../services/location.service';
 
 @Component({
     selector: 'app-zipcode-entry',
@@ -14,7 +14,11 @@ import { LocationService } from '../../location.service';
 })
 export class ZipcodeEntryComponent {
 
-    zipCodeControl = new FormControl('', Validators.required, CustomValidators.zipcodeEntryValidator(this.store));
+    zipCodeControl = new FormControl(
+        '',
+        [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(5), Validators.maxLength(5)],
+        CustomValidators.zipcodeEntryValidator(this.store)
+    );
     protected loadingConditions$: Observable<boolean> = this.store.select(selectLoadingConditions);
 
     constructor(

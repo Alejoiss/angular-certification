@@ -1,9 +1,11 @@
 <div class="tab">
     <ul>
-        <li *ngFor="let tab of tabs" (click)="markTabActive(tab, $event)" [class.active]="tab.active">
-            <span>{{ tab.title }}</span>
-            <span class="close" (click)="close(tab)">X</span>
-        </li>
+        @for (tab of tabs; track $index) {
+            <li [class.active]="tab.active" (click)="markTabActive(tab, $event)">
+                <span>{{ tab.title }}</span>
+                <span class="close" (click)="close(tab)">X</span>
+            </li>
+        }
     </ul>
 </div>
 

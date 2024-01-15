@@ -26,5 +26,11 @@ export const WeatherReducer = createReducer(
     ),
     on(WeatherActions.removeCurrentConditionsAction, (state, action) =>
         currentConditionsAdapter.removeOne(action.conditionsAndZip.id, state)
+    ),
+    on(WeatherActions.disableLoadingAction, (state, action) =>
+       ({
+            ...state,
+            loading: false
+        })
     )
 );

@@ -1,7 +1,8 @@
 <app-tabs [showLastOnAdd]="true">
-    <app-tab-item title="{{location.data.name}} ({{location.zip}})" (close)="locationService.removeLocation(location)"
-        *ngFor="let location of currentConditionsByZip$ | async">
-        <app-conditions-details [location]="location" (closeEvent)="locationService.removeLocation(location)">
-        </app-conditions-details>
-    </app-tab-item>
+    @for (location of currentConditionsByZip$ | async; track location.zip) {
+        <app-tab-item title="{{location.data.name}} ({{location.zip}})" (close)="locationService.removeLocation(location)">
+            <app-conditions-details [location]="location" (closeEvent)="locationService.removeLocation(location)">
+            </app-conditions-details>
+        </app-tab-item>
+    }
 </app-tabs>

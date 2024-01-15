@@ -5,9 +5,11 @@
 
         </div>
         <ul class="list-group">
-            <li *ngFor="let dailyForecast of forecast?.list" class="list-group-item">
-                <app-forecast-details [dailyForecast]="dailyForecast"></app-forecast-details>
-            </li>
+            @for (dailyForecast of forecast?.list; track $index) {
+                <li class="list-group-item">
+                    <app-forecast-details [dailyForecast]="dailyForecast"></app-forecast-details>
+                </li>
+            }
         </ul>
     </div>
 </div>

@@ -3,15 +3,29 @@
     <input type="text" #zipcode placeholder="Zipcode" class="form-control" [formControl]="zipCodeControl"
         (keyup.enter)="addLocation()">
 
-    <span class="text-hint text-danger" *ngIf="zipCodeControl.hasError('duplicatedZipcode') && zipCodeControl.dirty">
-        This zipcode is already in the list
-    </span>
+    @if(zipCodeControl.invalid && zipCodeControl.dirty) {
+        @if (zipCodeControl.hasError('duplicatedZipcode')) {
+            <span class="text-hint text-danger">
+                This zipcode is already in the list.
+            </span>
+        } @else if (zipCodeControl.hasError('pattern')) {
+            <span class="text-hint text-danger">
+                Only numbers are allowed.
+            </span>
+        } @else if(zipCodeControl.hasError('minlength')) {
+            <span class="text-hint text-danger">
+                Zipcode must be 5 digits long.
+            </span>
+        }
+    }
     <br>
     <button class="btn btn-primary" (click)="addLocation()">
         Add location
     </button>
     <!-- Loading for user see when the request is being made -->
-    <div *ngIf="loadingConditions$ | async" class="loading">
-        <img src="https://www.icegif.com/wp-content/uploads/2023/07/icegif-1263.gif" alt="Loading...">
-    </div>
+    @if(loadingConditions$ | async) {
+        <div class="loading">
+            <img src="https://www.icegif.com/wp-content/uploads/2023/07/icegif-1263.gif" alt="Loading...">
+        </div>
+    }
 </div>

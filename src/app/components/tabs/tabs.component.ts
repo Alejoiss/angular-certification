@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectorRef, Component, ContentChildren, Input, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '@angular/core';
 import { TabItemComponent } from 'app/components/tabs/tab-item/tab-item.component';
 
 @Component({
@@ -11,10 +11,6 @@ export class TabsComponent implements AfterContentInit {
 
     // If true, the last tab will be shown when a new tab is added dinamically
     @Input() showLastOnAdd = false;
-
-    constructor(
-        private cdr: ChangeDetectorRef
-    ) { }
 
     ngAfterContentInit(): void {
         this.checkForActiveTabs();
@@ -36,7 +32,6 @@ export class TabsComponent implements AfterContentInit {
     markTabActive(tab: TabItemComponent, e: MouseEvent = null) {
         if (!e || (e && !(e.target as HTMLElement).closest('.close'))) {
             this.tabs.forEach(t => t.active = t === tab);
-            this.cdr.detectChanges();
         }
     }
 

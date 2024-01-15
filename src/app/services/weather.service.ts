@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CurrentConditions } from 'app/components/current-conditions/current-conditions.type';
+import { Forecast } from 'app/components/forecasts-list/forecast.type';
 import { Observable } from 'rxjs';
 
-import { CurrentConditions } from './components/current-conditions/current-conditions.type';
-import { Forecast } from './components/forecasts-list/forecast.type';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class WeatherService {
     static URL = 'http://api.openweathermap.org/data/2.5';
     static APPID = '5a4b2d457ecbef9eb2a71e480b947604';

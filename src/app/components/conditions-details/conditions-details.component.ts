@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
-import { WeatherService } from 'app/weather.service';
+import { WeatherService } from 'app/services/weather.service';
 
 @Component({
     selector: 'app-conditions-details',

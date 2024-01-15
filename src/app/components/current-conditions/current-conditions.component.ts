@@ -5,7 +5,7 @@ import { selectAllCurrentConditions } from 'app/store/weather/weather-selectors'
 import { Observable } from 'rxjs';
 
 import { ConditionsAndZip } from '../../conditions-and-zip.type';
-import { LocationService } from '../../location.service';
+import { LocationService } from '../../services/location.service';
 
 @Component({
     selector: 'app-current-conditions',

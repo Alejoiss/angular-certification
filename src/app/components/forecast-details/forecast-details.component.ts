@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { List } from 'app/components/forecasts-list/forecast.type';
-import { WeatherService } from 'app/weather.service';
+import { WeatherService } from 'app/services/weather.service';
 
 @Component({
     selector: 'app-forecast-details',
@@ -16,7 +16,7 @@ export class ForecastDetailsComponent implements OnInit{
     icon: string = '';
 
     ngOnInit(): void {
-        // Removed the function called in template to avoid performance issues
+        // Removed the function called in the template to avoid performance issues
         this.icon = this.weatherService.getWeatherIcon(this.dailyForecast.weather[0].id);
     }
 }
