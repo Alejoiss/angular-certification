@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DataStorage } from 'app/data-storage';
 import { LocalStorageService } from 'app/services/local-storage.service';
 import { WeatherService } from 'app/services/weather.service';
 import { tap } from 'rxjs/operators';
 
 import { Forecast } from './forecast.type';
+import { ForecastDetailsComponent } from '../forecast-details/forecast-details.component';
 
 @Component({
     selector: 'app-forecasts-list',
     templateUrl: './forecasts-list.component.html',
-    styleUrls: ['./forecasts-list.component.css']
+    styleUrls: ['./forecasts-list.component.css'],
+    standalone: true,
+    imports: [ForecastDetailsComponent, RouterLink]
 })
 export class ForecastsListComponent implements OnInit {
     zipcode: string;

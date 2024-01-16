@@ -25,17 +25,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { ZipcodeEntryComponent } from './components/zipcode-entry/zipcode-entry.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ZipcodeEntryComponent,
-        ForecastsListComponent,
-        CurrentConditionsComponent,
-        ConditionsDetailsComponent,
-        MainPageComponent,
-        TabsComponent,
-        TabItemComponent,
-        ForecastDetailsComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         FormsModule,
@@ -44,7 +34,7 @@ import { ZipcodeEntryComponent } from './components/zipcode-entry/zipcode-entry.
         RouterModule,
         routing,
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-        StoreModule.forRoot({'currentConditions': WeatherReducer}, {}),
+        StoreModule.forRoot({ 'currentConditions': WeatherReducer }, {}),
         EffectsModule.forRoot([WeatherEffects, GenericoEffects]),
         StoreRouterConnectingModule.forRoot({
             stateKey: 'router',
@@ -54,6 +44,14 @@ import { ZipcodeEntryComponent } from './components/zipcode-entry/zipcode-entry.
             maxAge: 25,
             logOnly: environment.production
         }),
+        ZipcodeEntryComponent,
+        ForecastsListComponent,
+        CurrentConditionsComponent,
+        ConditionsDetailsComponent,
+        MainPageComponent,
+        TabsComponent,
+        TabItemComponent,
+        ForecastDetailsComponent,
     ],
     providers: [],
     bootstrap: [AppComponent]

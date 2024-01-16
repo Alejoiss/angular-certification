@@ -18,21 +18,21 @@ export class WeatherEffects {
                     filter(data => !!data.zipcode),
                     concatMap(action => this.weatherService.getCurrentConditions(action.zipcode)
                         .pipe(
-                            map(currentConditions => ({ currentConditions, zipcode: action.zipcode }))
+                            map(currentConditions => ({ currentConditions, zipcode: action.zipcode })),
+                            map(({ currentConditions, zipcode }) => WeatherActions.currentConditionsLoadedAction({
+                                conditionsAndZip: {
+                                    id: new Date().getTime(), // create a unique id for store
+                                    data: currentConditions,
+                                    zip: zipcode
+                                }
+                            })),
+                            tap(data => this.localStorageService.createDataStorage(data.conditionsAndZip, data.conditionsAndZip.zip, 'current')),
+                            catchError(error => [
+                                GenericoActions.erroGenericoAction({ error: error.error.message }),
+                                WeatherActions.disableLoadingAction()
+                            ])
                         )
                     ),
-                    map(({ currentConditions, zipcode }) => WeatherActions.currentConditionsLoadedAction({
-                        conditionsAndZip: {
-                            id: new Date().getTime(), // create a unique id for store
-                            data: currentConditions,
-                            zip: zipcode
-                        }
-                    })),
-                    tap(data => this.localStorageService.createDataStorage(data.conditionsAndZip, data.conditionsAndZip.zip, 'current')),
-                    catchError(error => [
-                        GenericoActions.erroGenericoAction({ error: error.error.message }),
-                        WeatherActions.disableLoadingAction()
-                    ])
                 );
         }
     );

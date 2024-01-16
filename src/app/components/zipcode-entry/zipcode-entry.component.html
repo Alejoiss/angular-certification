@@ -1,6 +1,6 @@
 <div class="well">
     <h2>Enter a zipcode:</h2>
-    <input type="text" #zipcode placeholder="Zipcode" class="form-control" [formControl]="zipCodeControl"
+    <input type="text" #zipcode placeholder="Zipcode" class="form-control" [formControl]="zipCodeControl" maxlength="5"
         (keyup.enter)="addLocation()">
 
     @if(zipCodeControl.invalid && zipCodeControl.dirty) {

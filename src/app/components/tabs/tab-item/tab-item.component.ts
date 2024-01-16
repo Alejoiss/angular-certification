@@ -12,7 +12,8 @@ import {
     selector: 'app-tab-item',
     templateUrl: './tab-item.component.html',
     styleUrl: './tab-item.component.css',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class TabItemComponent implements AfterContentChecked {
     @Input({ required: true }) title: string;

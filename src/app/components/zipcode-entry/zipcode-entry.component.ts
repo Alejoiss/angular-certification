@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectLoadingConditions } from 'app/store/weather/weather-selectors';
 import { CustomValidators } from 'app/validators/custom-validators';
 import { Observable } from 'rxjs';
 
 import { LocationService } from '../../services/location.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-zipcode-entry',
     templateUrl: './zipcode-entry.component.html',
-    styleUrls: ['./zipcode-entry.component.css']
+    styleUrls: ['./zipcode-entry.component.css'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, AsyncPipe]
 })
 export class ZipcodeEntryComponent {
 

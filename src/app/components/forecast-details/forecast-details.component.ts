@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { List } from 'app/components/forecasts-list/forecast.type';
 import { WeatherService } from 'app/services/weather.service';
+import { DecimalPipe, DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-forecast-details',
     templateUrl: './forecast-details.component.html',
     styleUrl: './forecast-details.component.css',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [DecimalPipe, DatePipe]
 })
 export class ForecastDetailsComponent implements OnInit{
     @Input() dailyForecast: List;

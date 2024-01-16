@@ -2,9 +2,10 @@ import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '
 import { TabItemComponent } from 'app/components/tabs/tab-item/tab-item.component';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrl: './tabs.component.css'
+    selector: 'app-tabs',
+    templateUrl: './tabs.component.html',
+    styleUrl: './tabs.component.css',
+    standalone: true
 })
 export class TabsComponent implements AfterContentInit {
     @ContentChildren(TabItemComponent) tabs: QueryList<TabItemComponent>;
