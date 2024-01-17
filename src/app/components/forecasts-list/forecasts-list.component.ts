@@ -5,8 +5,8 @@ import { LocalStorageService } from 'app/services/local-storage.service';
 import { WeatherService } from 'app/services/weather.service';
 import { tap } from 'rxjs/operators';
 
-import { Forecast } from './forecast.type';
 import { ForecastDetailsComponent } from '../forecast-details/forecast-details.component';
+import { Forecast } from './forecast.type';
 
 @Component({
     selector: 'app-forecasts-list',
@@ -36,7 +36,7 @@ export class ForecastsListComponent implements OnInit {
         this.localStorageService.setActiveData('forecast');
         const forecasts = this.localStorageService.getDataFromJson('forecast');
 
-        this.forecast = forecasts.find((f: DataStorage) => f.zip === this.zipcode && f.active)?.data;
+        this.forecast = forecasts.find((f: DataStorage) => f.zip === this.zipcode && f.active)?.data as Forecast;
 
         if (!this.forecast) {
             this.weatherService.getForecast(this.zipcode)

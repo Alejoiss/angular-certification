@@ -25,7 +25,7 @@ export class LocationService {
 
         currents.forEach((c: DataStorage) => {
             if (c.active) {
-                this.store.dispatch(WeatherActions.currentConditionsLoadedAction({ conditionsAndZip: c.data }));
+                this.store.dispatch(WeatherActions.currentConditionsLoadedAction({ conditionsAndZip: c.data as ConditionsAndZip }));
             } else {
                 this.store.dispatch(WeatherActions.loadCurrentConditionsAction({ zipcode: c.zip }));
             }

@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
-import { WeatherService } from 'app/services/weather.service';
 import { DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ConditionsAndZip } from 'app/conditions-and-zip.type';
+import { WeatherService } from 'app/services/weather.service';
 
 @Component({
     selector: 'app-conditions-details',
@@ -12,7 +13,7 @@ import { RouterLink } from '@angular/router';
     imports: [RouterLink, DecimalPipe]
 })
 export class ConditionsDetailsComponent implements OnInit{
-    @Input({ required: true }) location: any;
+    @Input({ required: true }) location: ConditionsAndZip;
 
     private weatherService = inject(WeatherService);
 

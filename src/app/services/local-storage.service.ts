@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Forecast } from 'app/components/forecasts-list/forecast.type';
+import { ConditionsAndZip } from 'app/conditions-and-zip.type';
 import { DataStorage } from 'app/data-storage';
 
 const DEFAULT_TIME_EXPIRATION = 1000 * 60 * 60 * 2; // 2 hours
+
+export type typeDataStorage = 'current' | 'forecast';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LocalStorageService {
 
-    getDataFromJson(key: 'current' | 'forecast'): any {
+    getDataFromJson(key:typeDataStorage): DataStorage[] {
         const data = localStorage.getItem(key);
         return data ? JSON.parse(data) : [];
     }
 
-    setDataFromObject(key: string, data: any): void {
+    setDataFromObject(key: string, data: DataStorage[]): void {
         window.localStorage.setItem(key, JSON.stringify(data));
     }
 
@@ -21,7 +25,7 @@ export class LocalStorageService {
         window.localStorage.removeItem(key);
     }
 
-    setActiveData(type: 'current' | 'forecast'): void {
+    setActiveData(type:typeDataStorage): void {
         const dataFromStorage = this.getDataFromJson(type);
 
         const validData = dataFromStorage.map((d: DataStorage) => {
@@ -32,7 +36,7 @@ export class LocalStorageService {
         this.setDataFromObject(type, validData);
     }
 
-    clearInactivatedData(type: 'current' | 'forecast'): void {
+    clearInactivatedData(type:typeDataStorage): void {
         const dataFromStorage = this.getDataFromJson(type);
 
         const validData = dataFromStorage.filter((d: DataStorage) => d.active);
@@ -40,7 +44,7 @@ export class LocalStorageService {
         this.setDataFromObject(type, validData);
     }
 
-    createDataStorage(data: any, zip: string, type: 'current' | 'forecast'): void {
+    createDataStorage(data: ConditionsAndZip | Forecast, zip: string, type:typeDataStorage): void {
         const register: DataStorage = {
             date: new Date().getTime(),
             data,
@@ -51,7 +55,7 @@ export class LocalStorageService {
         this.replaceData(type, register);
     }
 
-    removeDataStorageByZip(zip: string, type: 'current' | 'forecast'): void {
+    removeDataStorageByZip(zip: string, type:typeDataStorage): void {
         const dataFromStorage = this.getDataFromJson(type);
 
         const validData = dataFromStorage.filter((d: DataStorage) => d.zip !== zip);
@@ -59,7 +63,7 @@ export class LocalStorageService {
         this.setDataFromObject(type, validData);
     }
 
-    replaceData(key: 'current' | 'forecast', register: DataStorage): void {
+    replaceData(key:typeDataStorage, register: DataStorage): void {
         this.setActiveData(key);
         const currents = this.getDataFromJson(key);
         currents.push(register);
